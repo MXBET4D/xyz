@@ -24,6 +24,18 @@ const db = firebase.firestore();
 let currentUser = null;
 </script>
 
+<script>
+  function showPage(id){
+    document.querySelectorAll('.page').forEach(p=>{
+      p.classList.remove('active');
+    });
+    document.getElementById(id).classList.add('active');
+  }
+
+  // awalnya yang muncul hanya home
+  showPage('home');
+</script>
+
 <style>
 html, body {
   margin: 0;
@@ -92,11 +104,14 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
 /* Page */
 /* konten halaman */
 .page {
+  display:none;
   flex: 1 0 auto;
   padding-bottom: 90px; /* ruang untuk nav */
   min-height: calc(100vh - 90px);
 }
-.active{display:block;opacity:1;transform:translateY(0);}
+.page.active {
+  display:block; /* hanya page aktif yg tampil */
+}
 
 /* FORM BOX */
 .form-box input,
@@ -248,6 +263,9 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
 <body>
   <!-- Home -->
   <div id="home" class="page active">
+    <h1>Selamat Datang</h1>
+  <button onclick="showPage('daftar')" class="btn-main">Daftar</button>
+</div>
     <!-- Header hanya logo -->
     <header>
       <div class="logo">
@@ -272,13 +290,14 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
 <!-- Daftar -->
 <div id="daftar" class="page">
 <div class="form-box">
-<h2>Form Pendaftaran</h2>
-<input type="text" id="newUser" placeholder="User ID" />
-<input type="password" id="newPass" placeholder="Kata Sandi" />
-<input type="text" id="rekNum" placeholder="No. Rekening" />
-<input type="text" id="rekName" placeholder="Nama Rekening" />
-<input type="text" id="phoneNum" placeholder="No. HP" />
-<select id="bankType">
+ <h2>Form Pendaftaran</h2>
+ <form id="registerForm">
+  <input type="text" id="newUser" placeholder="User ID" />
+  <input type="password" id="newPass" placeholder="Kata Sandi" />
+  <input type="text" id="rekNum" placeholder="No. Rekening" />
+  <input type="text" id="rekName" placeholder="Nama Rekening" />
+  <input type="text" id="phoneNum" placeholder="No. HP" />
+  <select id="bankType">
   <option value="">-- Pilih Bank / E-Wallet --</option>
   <option>Bank BCA</option>
   <option>Bank BNI</option>
@@ -290,9 +309,11 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
   <option>ShopeePay</option>
 </select>
 <button onclick="register()">Daftar</button>
-<br /><br />
-<button style="background:#ff4444" onclick="showPage('home')">Kembali</button>
-</div>
+ </form>
+  <p style="text-align:center; margin-top:10px;">
+    Sudah punya akun? 
+    <span style="color: var(--color-primary); cursor:pointer;" onclick="showPage('home')">Kembali</span>
+  </p>
 </div>
 
 <!-- User Area -->
