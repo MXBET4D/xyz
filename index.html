@@ -1,3 +1,4 @@
+<!-- HTML BARU SUDAH DIMODIFIKASI TOTAL -->
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -39,12 +40,21 @@
     .game-card img { width:100%; height:auto; display:block; }
     .game-card div { padding:0.5rem; font-weight:bold; }
 
-    #userArea { display:none; padding:20px; color:#fff; max-width:600px; margin:20px auto; background:#1a1a33; border-radius:8px; }
-    #userArea h2 { margin-bottom:10px; }
-    #userArea .section { margin-top:15px; }
-    #userArea input, #userArea button { width:100%; padding:10px; margin:6px 0; border-radius:6px; border:1px solid #444; background:#121224; color:#eee; font-weight:bold; cursor:pointer; }
+    #dashboard { display:none; max-width:1200px; margin:20px auto; color:#fff; }
+    #dashboard header { display:flex; justify-content:space-between; align-items:center; background:#1a1a33; padding:15px; border-radius:8px 8px 0 0; }
+    #dashboard nav { display:flex; flex-wrap:wrap; gap:10px; background:#232332; padding:15px; margin-top:20px; border-radius:8px; }
+    #dashboard nav button { flex:1; background:#444; color:#ccc; padding:10px; border:none; border-radius:4px; }
+    #dashboard nav button:first-child { background:#ffcc00; color:#000; }
+    .info-boxes { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px; background:#121224; padding:20px; border-radius:0 0 8px 8px; box-shadow:0 0 10px rgba(0,0,0,0.6); }
+    .info-box { background:#1f1f2e; padding:15px; border-radius:8px; }
+    .info-box h3 { color:#ff4d4d; margin-bottom:10px; }
+    .game-section { margin-top:20px; }
+    .game-section h2 { margin-bottom:10px; }
+    .game-section .game-grid { grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:15px; }
+    .game-card { background:#1f1f2e; border-radius:8px; overflow:hidden; cursor:pointer; box-shadow:0 4px 8px rgba(0,0,0,0.6); }
+    .game-card img { width:100%; display:block; }
+    .game-card div { padding:10px; font-weight:bold; text-align:center; }
 
-    /* Mobile */
     @media(max-width:768px) {
       header { flex-direction:column; align-items:flex-start; gap:1rem; }
       .header-right { align-items:flex-start; width:100%; }
@@ -54,13 +64,10 @@
       .banner p { font-size:0.95rem; }
       .game-grid { grid-template-columns:repeat(2,1fr); }
     }
-    #registerForm input,
-#registerForm select {
-  display: block;
-  width: 100% !important;
-  margin-bottom: 10px;
-  box-sizing: border-box;
-}
+
+    #registerForm input, #registerForm select {
+      display:block; width:100%!important; margin-bottom:10px; box-sizing:border-box;
+    }
   </style>
 </head>
 <body>
@@ -78,40 +85,57 @@
       <a href="https://wa.me/6282128009210" target="_blank" class="btn-wa">💬 Live Chat</a>
     </div>
   </header>
-<!-- Tambahkan di dalam <body> setelah login area -->
-<div id="dashboard" style="display:none; color:#fff; background:#121224; padding:20px; max-width:1200px; margin: 20px auto; border-radius: 8px;">
-  <header style="display:flex; justify-content:space-between; align-items:center; background:#222; padding:10px; border-radius:6px; margin-bottom:20px;">
-    <div>
-      <img src="https://i.postimg.cc/sXqvG8TN/GLORYGAME99.png" alt="Logo" style="height:40px;">
-    </div>
-    <div>
-      <span>User: <strong id="dashUser"></strong></span> |
-      <button onclick="logout()" style="background:#e74c3c; border:none; padding:5px 10px; color:#fff; border-radius:4px; cursor:pointer;">Logout</button>
-    </div>
-  </header>
 
-  <nav style="display:flex; gap:15px; background:#333; padding:10px; border-radius:6px; margin-bottom:20px;">
-    <button style="background:#ffcc00; border:none; padding:8px 12px; border-radius:4px; cursor:pointer;">Slot</button>
-    <button style="background:#444; border:none; padding:8px 12px; border-radius:4px; cursor:pointer; color:#ccc;">Live Casino</button>
-    <button style="background:#444; border:none; padding:8px 12px; border-radius:4px; cursor:pointer; color:#ccc;">Sport</button>
-    <button style="background:#444; border:none; padding:8px 12px; border-radius:4px; cursor:pointer; color:#ccc;">Arcade</button>
-    <button style="background:#444; border:none; padding:8px 12px; border-radius:4px; cursor:pointer; color:#ccc;">Interactive</button>
-  </nav>
-
-  <section>
-    <h2>Game Slots Terpopuler</h2>
-    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px;">
-      <!-- Contoh kartu game -->
-      <div style="background:#222; border-radius:8px; overflow:hidden; cursor:pointer; box-shadow:0 4px 8px rgba(0,0,0,0.6);">
-        <img src="https://i.postimg.cc/3x3fS9x3/cai-shen-2.png" alt="Cai Shen 2" style="width:100%; height:auto; display:block;">
-        <div style="padding:10px; font-weight:bold; text-align:center;">Chests of Cai Shen 2</div>
+  <div id="dashboard">
+    <header>
+      <div>
+        <img src="https://i.postimg.cc/sXqvG8TN/GLORYGAME99.png" alt="Logo" style="height:50px;">
       </div>
-      <!-- Tambah kartu game lain sesuai kebutuhan -->
+      <div style="text-align:right;">
+        <div><strong>User:</strong> <span id="dashUser"></span> | <strong>Balance:</strong> Rp 2.000.000</div>
+        <div>Bank/E-Wallet: <span id="dashBank">-</span></div>
+        <div>HP: <span id="dashHP">-</span></div>
+        <button onclick="logout()" style="background:#e74c3c; border:none; padding:5px 10px; color:#fff; border-radius:4px; cursor:pointer; margin-top:5px;">Logout</button>
+      </div>
+    </header>
+
+    <div class="info-boxes">
+      <div class="info-box">
+        <h3>User Data</h3>
+        <p>User: <span id="dashUserInfo"></span></p>
+        <p>Balance: Rp 2.000.000</p>
+        <p>Bank: <span id="dashBankInfo"></span></p
+                <p>No HP: <span id="dashHPInfo"></span></p>
+      </div>
+      <div class="info-box">
+        <h3>Deposit</h3>
+        <form id="depositForm">
+          <input type="number" id="depositAmount" placeholder="Jumlah Deposit" required style="width:100%; padding:10px; margin-bottom:10px; border-radius:6px; border:1px solid #444; background:#121224; color:#eee;">
+          <button type="submit" style="background:#00cc66; color:#fff; border:none; padding:10px; border-radius:6px; cursor:pointer;">Kirim Deposit</button>
+        </form>
+      </div>
+      <div class="info-box">
+        <h3>Withdraw</h3>
+        <form id="withdrawForm">
+          <input type="number" id="withdrawAmount" placeholder="Jumlah Withdraw" required style="width:100%; padding:10px; margin-bottom:10px; border-radius:6px; border:1px solid #444; background:#121224; color:#eee;">
+          <button type="submit" style="background:#ffcc00; color:#000; border:none; padding:10px; border-radius:6px; cursor:pointer;">Kirim Withdraw</button>
+        </form>
+      </div>
     </div>
-  </section>
-</div>
-  
-  <!-- Form Daftar -->
+
+    <div class="game-section">
+      <h2>Game Slots Terpopuler</h2>
+      <div class="game-grid">
+        <div class="game-card">
+          <img src="https://i.postimg.cc/3x3fS9x3/cai-shen-2.png" alt="Cai Shen 2">
+          <div>Chests of Cai Shen 2</div>
+        </div>
+        <!-- Tambahkan kartu game lain di sini -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Halaman Daftar -->
   <div id="registerPage" style="display:none; background:#121224; padding:20px; border-radius:8px; max-width:400px; margin: 1rem auto; color: #eee;">
     <h2>Daftar Akun Baru</h2>
     <form id="registerForm">
@@ -141,34 +165,10 @@
     </p>
   </div>
 
-  <!-- Banner -->
   <div class="banner">
     <h1>🎉 Selamat Datang di MAXBET4D 🎉</h1>
     <p>Situs Resmi Aman dan Terpercaya. Daftar Sekarang & Menang!</p>
     <button class="btn-main">Main Sekarang</button>
-  </div>
-
-  <!-- User Area -->
-  <div id="userArea">
-    <h2>Selamat Datang, <span id="welcomeUser"></span> 👋</h2>
-
-    <div class="section">
-      <h3>💰 Deposit</h3>
-      <form id="depositForm">
-        <input type="number" id="depositAmount" placeholder="Jumlah Deposit" required>
-        <button type="submit" style="background:#00cc66;">Deposit</button>
-      </form>
-    </div>
-
-    <div class="section">
-      <h3>🏧 Withdraw</h3>
-      <form id="withdrawForm">
-        <input type="number" id="withdrawAmount" placeholder="Jumlah Withdraw" required>
-        <button type="submit" style="background:#ffcc00;">Withdraw</button>
-      </form>
-    </div>
-
-    <button onclick="logout()" style="margin-top:15px; background:#e74c3c; color:#fff;">Logout</button>
   </div>
 
   <script>
@@ -190,49 +190,58 @@
       const noHP = document.getElementById('regNoHP').value.trim();
       const bankEwallet = document.getElementById('regBankEwallet').value;
 
-      if(password!==confirmPassword){ alert('Kata sandi tidak cocok!'); return; }
-      if(localStorage.getItem('user_'+userId)){ alert('User ID sudah digunakan'); return; }
+      if(password !== confirmPassword){ alert('Kata sandi tidak cocok!'); return; }
+      if(localStorage.getItem('user_' + userId)){ alert('User ID sudah digunakan'); return; }
 
-      const userData={userId,email,password,namaRekening,nomorRekening,noHP,bankEwallet};
-      localStorage.setItem('user_'+userId, JSON.stringify(userData));
+      const userData = { userId, email, password, namaRekening, nomorRekening, noHP, bankEwallet };
+      localStorage.setItem('user_' + userId, JSON.stringify(userData));
       alert('Pendaftaran berhasil! Silakan login.');
       showPage('login');
     });
 
-   function login(){
-  const userId = document.getElementById('userLogin').value.trim();
-  const password = document.getElementById('passLogin').value;
-  if(!userId || !password){ alert('Isi User ID dan Kata Sandi'); return; }
-  const userDataJSON = localStorage.getItem('user_'+userId);
-  if(!userDataJSON){ alert('User ID tidak ditemukan'); return; }
-  const userData = JSON.parse(userDataJSON);
-  if(userData.password===password){
-    alert('Login berhasil!');
-    document.querySelector('.login-form').style.display='none';
-    document.getElementById('registerPage').style.display='none';
-    document.getElementById('userArea').style.display='none'; // hide userArea lama
-    document.getElementById('dashboard').style.display = 'block'; // show dashboard baru
-    document.getElementById('dashUser').textContent = userId;
-  } else alert('Kata sandi salah');
-}
+    function login(){
+      const userId = document.getElementById('userLogin').value.trim();
+      const password = document.getElementById('passLogin').value;
+      if(!userId || !password){ alert('Isi User ID dan Kata Sandi'); return; }
 
-function logout(){
-  document.getElementById('dashboard').style.display = 'none';
-  document.querySelector('.login-form').style.display = 'flex';
-  alert('Anda sudah logout.');
-}
+      const userDataJSON = localStorage.getItem('user_' + userId);
+      if(!userDataJSON){ alert('User ID tidak ditemukan'); return; }
+
+      const userData = JSON.parse(userDataJSON);
+      if(userData.password === password){
+        alert('Login berhasil!');
+        document.querySelector('.login-form').style.display = 'none';
+        document.getElementById('registerPage').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+
+        document.getElementById('dashUser').textContent = userData.userId;
+        document.getElementById('dashUserInfo').textContent = userData.userId;
+        document.getElementById('dashBank').textContent = userData.bankEwallet;
+        document.getElementById('dashHP').textContent = userData.noHP;
+        document.getElementById('dashBankInfo').textContent = userData.bankEwallet;
+        document.getElementById('dashHPInfo').textContent = userData.noHP;
+      } else {
+        alert('Kata sandi salah');
+      }
+    }
+
+    function logout(){
+      document.getElementById('dashboard').style.display = 'none';
+      document.querySelector('.login-form').style.display = 'flex';
+      alert('Anda sudah logout.');
+    }
 
     document.getElementById('depositForm').addEventListener('submit', function(e){
       e.preventDefault();
-      const amount=document.getElementById('depositAmount').value;
-      alert('Deposit sebesar Rp '+amount+' berhasil diajukan.');
+      const amount = document.getElementById('depositAmount').value;
+      alert('Deposit sebesar Rp ' + amount + ' berhasil diajukan.');
       this.reset();
     });
 
     document.getElementById('withdrawForm').addEventListener('submit', function(e){
       e.preventDefault();
-      const amount=document.getElementById('withdrawAmount').value;
-      alert('Withdraw sebesar Rp '+amount+' berhasil diajukan.');
+      const amount = document.getElementById('withdrawAmount').value;
+      alert('Withdraw sebesar Rp ' + amount + ' berhasil diajukan.');
       this.reset();
     });
 
@@ -240,3 +249,4 @@ function logout(){
   </script>
 </body>
 </html>
+
