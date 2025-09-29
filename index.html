@@ -45,14 +45,40 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
 
 /* Login form kecil */
 .login-form { display:flex; gap:6px; flex-wrap:wrap; flex-grow:1; justify-content:flex-end; }
+  .login-form {
+  display:flex;
+  gap:6px;
+  flex-direction:column; /* jadi kolom */
+  width:90%;
+  max-width:400px;
+  margin:20px auto;
+}
 .login-form input { padding:4px 6px; border-radius:4px; border:none; outline:none; min-width:80px; max-width:120px; font-size:12px; }
 .login-form button { padding:4px 8px; border:none; border-radius:4px; cursor:pointer; font-weight:bold; font-size:12px; max-width:100px; transition:all 0.3s ease; }
+  .login-form button {
+  width:100%;
+  font-size:14px;
+  padding:8px 10px;
+  border-radius:4px;
+  border:none;
+  margin-bottom:6px;
+}
 .btn-login { background:#ff4444; color:white; }
 .btn-daftar { background:#00cc66; color:white; }
 .login-form button:hover { transform:scale(1.05); opacity:0.9; }
 
 /* WhatsApp kecil */
 .btn-wa { display:inline-block; margin-top:6px; padding:6px 12px; background:#25D366; color:white; font-weight:bold; border-radius:6px; text-decoration:none; transition:all 0.3s ease; font-size:12px; }
+  .btn-wa {
+  display:inline-block;
+  padding:6px 12px;
+  background:#25D366;
+  color:white;
+  font-weight:bold;
+  border-radius:6px;
+  text-decoration:none;
+  font-size:14px;
+}
 .btn-wa:hover { background:#1ebe5d; transform:scale(1.05); }
 
 /* Banner */
@@ -68,6 +94,7 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
 .page {
   flex: 1 0 auto;
   padding-bottom: 90px; /* ruang untuk nav */
+  min-height: calc(100vh - 90px);
 }
 .active{display:block;opacity:1;transform:translateY(0);}
 
@@ -219,20 +246,28 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
 </head>
 
 <body>
-<!-- Home -->
-<div id="home" class="page active">
-<header>
-  <div class="logo"><img src="maxbet.png" alt="maxbet4d Logo"></div>
-  <div class="login-form">
-    <input type="text" id="userLogin" placeholder="User ID" />
-    <input type="password" id="passLogin" placeholder="Kata Sandi" />
-    <button class="btn-login" onclick="login()">Login</button>
-    <button class="btn-daftar" onclick="showPage('daftar')">Daftar</button>
+  <!-- Home -->
+  <div id="home" class="page active">
+    <!-- Header hanya logo -->
+    <header>
+      <div class="logo">
+        <img src="maxbet.png" alt="maxbet4d Logo">
+      </div>
+    </header>
+
+    <!-- Form login -->
+    <div class="login-form" style="flex-direction:column;align-items:stretch;width:90%;max-width:400px;margin:20px auto;">
+      <input type="text" id="userLogin" placeholder="User ID" />
+      <input type="password" id="passLogin" placeholder="Kata Sandi" />
+      <button class="btn-login" onclick="login()">Login</button>
+      <button class="btn-daftar" onclick="showPage('daftar')">Daftar</button>
+    </div>
+
+    <!-- Tombol Live Chat di bawah form -->
+    <div style="width:90%;max-width:400px;margin:0 auto;text-align:right;">
+      <a href="https://wa.me/6282128009210" target="_blank" class="btn-wa">💬 Live Chat</a>
+    </div>
   </div>
-  <div style="width:100%; text-align:right;">
-    <a href="https://wa.me/6282128009210" target="_blank" class="btn-wa">💬Live Chat</a>
-  </div>
-</header>
 
 <!-- Daftar -->
 <div id="daftar" class="page">
@@ -518,27 +553,27 @@ document.querySelectorAll(".provider-card").forEach(pc=>{
 
   <!-- Bottom Navigation -->
 <nav class="bottom-nav">
-  <a href="#" onclick="showPage('home')">
-    <img src="https://img.icons8.com/ios-filled/50/ffffff/home.png" alt="Home"/>
-    <span>Beranda</span>
-  </a>
-  <a href="#" onclick="alert('Promo belum tersedia')">
-    <img src="https://img.icons8.com/ios-filled/50/ffffff/megaphone.png" alt="Promo"/>
-    <span>Promosi</span>
-  </a>
-  <a href="#" onclick="alert('Event belum tersedia')">
-    <img src="https://img.icons8.com/ios-filled/50/ffffff/trophy.png" alt="Event"/>
-    <span>Event</span>
-  </a>
-  <a href="https://wa.me/6282128009210" target="_blank">
-    <img src="https://img.icons8.com/ios-filled/50/ffffff/chat.png" alt="Chat"/>
-    <span>Chat</span>
-  </a>
-  <a href="https://wa.me/6282128009210" target="_blank">
-    <img src="https://img.icons8.com/ios-filled/50/ffffff/online-support.png" alt="Livechat"/>
-    <span>Livechat</span>
-  </a>
-</nav>
+    <a href="#" onclick="showPage('home')">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/home.png" alt="Home"/>
+      <span>Beranda</span>
+    </a>
+    <a href="#" onclick="alert('Promo belum tersedia')">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/megaphone.png" alt="Promo"/>
+      <span>Promosi</span>
+    </a>
+    <a href="#" onclick="alert('Event belum tersedia')">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/trophy.png" alt="Event"/>
+      <span>Event</span>
+    </a>
+    <a href="https://wa.me/6282128009210" target="_blank">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/chat.png" alt="Chat"/>
+      <span>Chat</span>
+    </a>
+    <a href="https://wa.me/6282128009210" target="_blank">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/online-support.png" alt="Livechat"/>
+      <span>Livechat</span>
+    </a>
+  </nav>
   
 </body>
 </html>
