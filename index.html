@@ -25,6 +25,15 @@ let currentUser = null;
 </script>
 
 <style>
+html,body{
+  margin:0;
+  padding:0;
+  height:100%;
+  font-family:Arial,sans-serif;
+  background:#0a0f1c;
+  color:white;
+  overflow-x:hidden;
+}
 body { margin:0; font-family:Arial,sans-serif; background:#0a0f1c; color:white; overflow-x:hidden; }
 header { background:#111a33; padding:10px 20px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:100; box-shadow:0 4px 12px rgba(0,0,0,0.4); flex-wrap:wrap; }
 .logo { flex-shrink:0; }
@@ -51,9 +60,17 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
 .center-image { margin-top:30px; max-width:80%; border-radius:8px; height:auto; display:block; margin-left:auto; margin-right:auto; }
 
 /* Page */
-.page { padding-bottom: 70px; }
-.page { display:none; opacity:0; transform:translateY(20px); transition:all 0.6s ease; max-width:900px; margin:0 auto; padding:20px; }
-.active { display:block; opacity:1; transform:translateY(0); }
+.page{
+  padding-bottom:80px; /* tinggi bottom-nav */
+  display:none;
+  opacity:0;
+  transform:translateY(20px);
+  transition:all 0.6s ease;
+  max-width:900px;
+  margin:0 auto;
+  padding:20px;
+}
+.active{display:block;opacity:1;transform:translateY(0);}
 
 /* FORM BOX */
 .form-box input,
@@ -156,8 +173,9 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
   justify-content: space-around;
   align-items: center;
   padding: 8px 0;
+  padding-bottom: env(safe-area-inset-bottom); /* iPhone notch */
   border-top: 2px solid #FFD700;
-  z-index: 200;
+  z-index: 9999; /* lebih tinggi */
 }
 .bottom-nav a {
   flex: 1;
