@@ -105,7 +105,7 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
 .form-box h2 { color:#FFD700; margin-bottom:20px; }
 .form-box label { display:block; text-align:left; margin-top:10px; color:#FFD700; font-weight:bold; font-size:14px; }
 
-/* User area */
+/*  area */
 #userarea header { flex-wrap:wrap; }
 #userarea .menu { display:flex; gap:15px; flex-wrap:wrap; color:#FFD700; font-weight:bold; }
 #userarea .menu a { color:#FFD700; text-decoration:none; cursor:pointer; transition:color 0.3s ease; user-select:none; }
@@ -261,7 +261,7 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
 </div>
 
 <!-- User Area -->
-<div id="userarea" class="page">
+<div id="userarea" class="page" style="display:none;">
 <header>
 <div class="logo"><img src="maxbet.png" alt="maxbet Logo"></div>
 <div class="menu">
@@ -423,7 +423,7 @@ function showGames(provider){
 }
 
 // --- Page Navigation ---
-function showPage(id){
+function goToPage(id){
   document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
   document.getElementById(id).classList.add("active");
 }
@@ -436,21 +436,19 @@ function login(){
   db.collection("users").doc(u).get().then(doc=>{
     if(doc.exists && doc.data().password===p){
       currentUser={id:u,...doc.data()};
-      showPage("userarea"); updateUserInfo();
-    } else {alert("Login gagal!");}
+      // tampilkan userarea
+      document.querySelectorAll(".page").forEach(p=>p.style.display="none");
+      document.getElementById("userarea").style.display="block";
+      updateUserInfo();
+    } else {
+      alert("Login gagal!");
+    }
   });
 }
-function logout(){currentUser=null; showPage("home");}
-function register(){
-  const u=document.getElementById("newUser").value;
-  const p=document.getElementById("newPass").value;
-  const r=document.getElementById("rekNum").value;
-  const n=document.getElementById("rekName").value;
-  const ph=document.getElementById("phoneNum").value;
-  const b=document.getElementById("bankType").value;
-  if(!u||!p||!r||!n||!ph||!b){alert("Lengkapi semua field!"); return;}
-  db.collection("users").doc(u).set({password:p,rekening:r,nama:n,phone:ph,bank:b,balance:0})
-  .then(()=>{alert("Pendaftaran berhasil! Silakan login."); showPage("home");});
+function logout(){
+  currentUser=null;
+  document.querySelectorAll(".page").forEach(p=>p.style.display="none");
+  document.getElementById("home").style.display="block";
 }
 function updateUserInfo(){
   if(currentUser){
