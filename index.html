@@ -345,30 +345,6 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
 </div>
 </div>
 
-<!-- Bottom Navigation -->
-<nav class="bottom-nav">
-  <a href="#" onclick="showPage('home')">
-    <img src="https://img.icons8.com/ios-filled/50/ffffff/home.png" alt="Home"/>
-    <span>Beranda</span>
-  </a>
-  <a href="#" onclick="alert('Promo belum tersedia')">
-    <img src="https://img.icons8.com/ios-filled/50/ffffff/megaphone.png" alt="Promo"/>
-    <span>Promosi</span>
-  </a>
-  <a href="#" onclick="alert('Event belum tersedia')">
-    <img src="https://img.icons8.com/ios-filled/50/ffffff/trophy.png" alt="Event"/>
-    <span>Event</span>
-  </a>
-  <a href="https://wa.me/6282128009210" target="_blank">
-    <img src="https://img.icons8.com/ios-filled/50/ffffff/chat.png" alt="Chat"/>
-    <span>Chat</span>
-  </a>
-  <a href="https://wa.me/6282128009210" target="_blank">
-    <img src="https://img.icons8.com/ios-filled/50/ffffff/online-support.png" alt="Livechat"/>
-    <span>Livechat</span>
-  </a>
-</nav>
-
 <script>
 // --- Game List & Provider ---
 const providerGames = {
@@ -523,5 +499,30 @@ document.querySelectorAll(".provider-card").forEach(pc=>{
   pc.addEventListener("click",()=>showGames(pc.innerText));
 });
 </script>
+
+  <!-- Bottom Navigation -->
+<nav class="bottom-nav">
+  <a href="#" onclick="showPage('home')">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/home.png" alt="Home"/>
+    <span>Beranda</span>
+  </a>
+  <a href="#" onclick="alert('Promo belum tersedia')">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/megaphone.png" alt="Promo"/>
+    <span>Promosi</span>
+  </a>
+  <a href="#" onclick="alert('Event belum tersedia')">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/trophy.png" alt="Event"/>
+    <span>Event</span>
+  </a>
+  <a href="https://wa.me/6282128009210" target="_blank">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/chat.png" alt="Chat"/>
+    <span>Chat</span>
+  </a>
+  <a href="https://wa.me/6282128009210" target="_blank">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/online-support.png" alt="Livechat"/>
+    <span>Livechat</span>
+  </a>
+</nav>
+  
 </body>
 </html>
