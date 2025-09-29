@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>MAXBET4D - Full Web Firebase</title>
 
 <!-- Firebase SDK -->
@@ -25,16 +25,20 @@ let currentUser = null;
 </script>
 
 <style>
-html,body{
-  margin:0;
-  padding:0;
-  height:100%;
-  font-family:Arial,sans-serif;
-  background:#0a0f1c;
-  color:white;
-  overflow-x:hidden;
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  min-height: 100%;
 }
-body { margin:0; font-family:Arial,sans-serif; background:#0a0f1c; color:white; overflow-x:hidden; }
+body {
+  display: flex;
+  flex-direction: column;
+  background: #0a0f1c;
+  font-family: Arial, sans-serif;
+  color: white;
+  overflow-x: hidden;
+}
 header { background:#111a33; padding:10px 20px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:100; box-shadow:0 4px 12px rgba(0,0,0,0.4); flex-wrap:wrap; }
 .logo { flex-shrink:0; }
 .logo img { max-height:100px; vertical-align: middle; }
@@ -60,15 +64,10 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
 .center-image { margin-top:30px; max-width:80%; border-radius:8px; height:auto; display:block; margin-left:auto; margin-right:auto; }
 
 /* Page */
-.page{
-  padding-bottom:80px; /* tinggi bottom-nav */
-  display:none;
-  opacity:0;
-  transform:translateY(20px);
-  transition:all 0.6s ease;
-  max-width:900px;
-  margin:0 auto;
-  padding:20px;
+/* konten halaman */
+.page {
+  flex: 1 0 auto;
+  padding-bottom: 90px; /* ruang untuk nav */
 }
 .active{display:block;opacity:1;transform:translateY(0);}
 
@@ -162,20 +161,20 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
 /* QRIS */
 #qrisImage { width:250px; max-width:80%; height:auto; display:block; margin:15px auto; border-radius:8px; }
 
-/* Footer menu (Bottom Navigation) */
+/* nav bawah */
 .bottom-nav {
   position: fixed;
   bottom: 0;
   left: 0;
-  right: 0;
+  width: 100%;
   background: #111a33;
   display: flex;
   justify-content: space-around;
   align-items: center;
   padding: 8px 0;
-  padding-bottom: env(safe-area-inset-bottom); /* iPhone notch */
+  padding-bottom: env(safe-area-inset-bottom);
   border-top: 2px solid #FFD700;
-  z-index: 9999; /* lebih tinggi */
+  z-index: 9999;
 }
 .bottom-nav a {
   flex: 1;
