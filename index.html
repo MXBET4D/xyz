@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MAXBET4D - Full Web Firebase</title>
+  <style>
+    :root {
+      --color-bg: #0f1224;
+      --color-primary: #ffcc00;
+      --color-secondary: #1e1e2f;
+      --color-accent: #00cc66;
+      --color-text: #ffffff;
+      --color-muted: #aaaaaa;
+      --radius: 8px;
+      --transition: 0.3s ease;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Segoe UI', sans-serif; background:var(--color-bg); color:var(--color-text); line-height:1.6; }
+    header { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; padding:1rem; background:var(--color-secondary); box-shadow:var(--shadow); position:sticky; top:0; z-index:999; }
+    .logo img { height:60px; width:auto; }
+    .header-right { display:flex; flex-direction:column; gap:0.5rem; align-items:flex-end; }
+    .login-form { display:flex; flex-wrap:wrap; gap:0.5rem; }
+    .login-form input { width:100%; padding:8px 12px; font-size:14px; color:#eee; background-color:#121224; border:1px solid #444; border-radius:6px; transition:border-color 0.3s ease; }
+    .login-form button { padding:0.5rem 1rem; background:var(--color-primary); color:#000; border:none; border-radius:var(--radius); cursor:pointer; transition:background var(--transition); }
+    .login-form button:hover { background:var(--color-accent); }
+    .btn-wa { background:#25D366; color:white; padding:0.5rem 1rem; border-radius:var(--radius); text-decoration:none; font-weight:bold; transition:background var(--transition); }
+    .btn-wa:hover { background:#1ebe5d; }
+    .banner { background:linear-gradient(135deg, #1e3c72, #2a5298); text-align:center; padding:2rem 1rem; margin:1rem auto; border-radius:var(--radius); max-width:100%; color:var(--color-primary); box-shadow:var(--shadow); }
+    .banner h1 { font-size:2rem; margin-bottom:0.5rem; }
+    .banner p { color:var(--color-muted); font-size:1rem; }
+    .btn-main { margin-top:1rem; padding:0.75rem 1.5rem; background:var(--color-primary); color:#000; border:none; border-radius:var(--radius); font-weight:bold; transition:background var(--transition); cursor:pointer; }
+    .btn-main:hover { background:var(--color-accent); }
+    .game-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:1rem; padding:1rem; }
+    .game-card { background:#1f1f1f; border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; text-align:center; transition:transform var(--transition); }
+    .game-card:hover { transform:translateY(-4px) scale(1.03); }
+    .game-card img { width:100%; height:auto; display:block; }
+    .game-card div { padding:0.5rem; font-weight:bold; }
+
+    #userArea { display:none; padding:20px; color:#fff; max-width:600px; margin:20px auto; background:#1a1a33; border-radius:8px; }
+    #userArea h2 { margin-bottom:10px; }
+    #userArea .section { margin-top:15px; }
+    #userArea input, #userArea button { width:100%; padding:10px; margin:6px 0; border-radius:6px; border:1px solid #444; background:#121224; color:#eee; font-weight:bold; cursor:pointer; }
+
+    /* Mobile */
+    @media(max-width:768px) {
+      header { flex-direction:column; align-items:flex-start; gap:1rem; }
+      .header-right { align-items:flex-start; width:100%; }
+      .login-form { width:100%; flex-direction:column; }
+      .btn-wa { width:100%; text-align:center; }
+      .banner h1 { font-size:1.5rem; }
+      .banner p { font-size:0.95rem; }
+      .game-grid { grid-template-columns:repeat(2,1fr); }
+    }
+    #registerForm input,
+#registerForm select {
+  display: block;
+  width: 100% !important;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="maxbet.png" alt="MAXBET Logo">
+    </div>
+    <div class="header-right">
+      <form class="login-form">
+        <input type="text" id="userLogin" placeholder="User ID" />
+        <input type="password" id="passLogin" placeholder="Kata Sandi" />
+        <button type="button" onclick="login()">Login</button>
+        <button type="button" onclick="showPage('daftar')">Daftar</button>
+      </form>
+      <a href="https://wa.me/6282128009210" target="_blank" class="btn-wa">💬 Live Chat</a>
+    </div>
+  </header>
+<!-- Tambahkan di dalam <body> setelah login area -->
+<div id="dashboard" style="display:none; color:#fff; background:#121224; padding:20px; max-width:1200px; margin: 20px auto; border-radius: 8px;">
+  <header style="display:flex; justify-content:space-between; align-items:center; background:#222; padding:10px; border-radius:6px; margin-bottom:20px;">
+    <div>
+      <img src="https://i.postimg.cc/sXqvG8TN/GLORYGAME99.png" alt="Logo" style="height:40px;">
+    </div>
+    <div>
+      <span>User: <strong id="dashUser"></strong></span> |
+      <button onclick="logout()" style="background:#e74c3c; border:none; padding:5px 10px; color:#fff; border-radius:4px; cursor:pointer;">Logout</button>
+    </div>
+  </header>
+
+  <nav style="display:flex; gap:15px; background:#333; padding:10px; border-radius:6px; margin-bottom:20px;">
+    <button style="background:#ffcc00; border:none; padding:8px 12px; border-radius:4px; cursor:pointer;">Slot</button>
+    <button style="background:#444; border:none; padding:8px 12px; border-radius:4px; cursor:pointer; color:#ccc;">Live Casino</button>
+    <button style="background:#444; border:none; padding:8px 12px; border-radius:4px; cursor:pointer; color:#ccc;">Sport</button>
+    <button style="background:#444; border:none; padding:8px 12px; border-radius:4px; cursor:pointer; color:#ccc;">Arcade</button>
+    <button style="background:#444; border:none; padding:8px 12px; border-radius:4px; cursor:pointer; color:#ccc;">Interactive</button>
+  </nav>
+
+  <section>
+    <h2>Game Slots Terpopuler</h2>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px;">
+      <!-- Contoh kartu game -->
+      <div style="background:#222; border-radius:8px; overflow:hidden; cursor:pointer; box-shadow:0 4px 8px rgba(0,0,0,0.6);">
+        <img src="https://i.postimg.cc/3x3fS9x3/cai-shen-2.png" alt="Cai Shen 2" style="width:100%; height:auto; display:block;">
+        <div style="padding:10px; font-weight:bold; text-align:center;">Chests of Cai Shen 2</div>
+      </div>
+      <!-- Tambah kartu game lain sesuai kebutuhan -->
+    </div>
+  </section>
+</div>
+  
+  <!-- Form Daftar -->
+  <div id="registerPage" style="display:none; background:#121224; padding:20px; border-radius:8px; max-width:400px; margin: 1rem auto; color: #eee;">
+    <h2>Daftar Akun Baru</h2>
+    <form id="registerForm">
+      <input type="text" id="regUserId" placeholder="User ID" required>
+      <input type="email" id="regEmail" placeholder="Email" required>
+      <input type="password" id="regPassword" placeholder="Kata Sandi" required>
+      <input type="password" id="regConfirmPassword" placeholder="Konfirmasi Kata Sandi" required>
+      <input type="text" id="regNamaRekening" placeholder="Nama Rekening" required>
+      <input type="text" id="regNomorRekening" placeholder="Nomor Rekening" required>
+      <input type="tel" id="regNoHP" placeholder="No HP" required>
+      <select id="regBankEwallet" required>
+        <option value="" disabled selected>Pilih Bank / E-Wallet</option>
+        <option value="bca">BCA</option>
+        <option value="bri">BRI</option>
+        <option value="bni">BNI</option>
+        <option value="mandiri">Mandiri</option>
+        <option value="dana">Dana</option>
+        <option value="ovo">OVO</option>
+        <option value="gopay">GoPay</option>
+        <option value="linkaja">LinkAja</option>
+      </select>
+      <button type="submit" style="background: var(--color-primary); color: #000;">Daftar</button>
+    </form>
+    <p style="text-align:center; margin-top:10px;">
+      Sudah punya akun? 
+      <span style="color: var(--color-primary); cursor:pointer;" onclick="showPage('login')">Login di sini</span>
+    </p>
+  </div>
+
+  <!-- Banner -->
+  <div class="banner">
+    <h1>🎉 Selamat Datang di MAXBET4D 🎉</h1>
+    <p>Situs Resmi Aman dan Terpercaya. Daftar Sekarang & Menang!</p>
+    <button class="btn-main">Main Sekarang</button>
+  </div>
+
+  <!-- User Area -->
+  <div id="userArea">
+    <h2>Selamat Datang, <span id="welcomeUser"></span> 👋</h2>
+
+    <div class="section">
+      <h3>💰 Deposit</h3>
+      <form id="depositForm">
+        <input type="number" id="depositAmount" placeholder="Jumlah Deposit" required>
+        <button type="submit" style="background:#00cc66;">Deposit</button>
+      </form>
+    </div>
+
+    <div class="section">
+      <h3>🏧 Withdraw</h3>
+      <form id="withdrawForm">
+        <input type="number" id="withdrawAmount" placeholder="Jumlah Withdraw" required>
+        <button type="submit" style="background:#ffcc00;">Withdraw</button>
+      </form>
+    </div>
+
+    <button onclick="logout()" style="margin-top:15px; background:#e74c3c; color:#fff;">Logout</button>
+  </div>
+
+  <script>
+    function showPage(page){
+      const loginPage = document.querySelector('.login-form');
+      const registerPage = document.getElementById('registerPage');
+      if(page==='login'){ loginPage.style.display='flex'; registerPage.style.display='none'; }
+      else if(page==='daftar'){ loginPage.style.display='none'; registerPage.style.display='block'; }
+    }
+
+    document.getElementById('registerForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const userId = document.getElementById('regUserId').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const password = document.getElementById('regPassword').value;
+      const confirmPassword = document.getElementById('regConfirmPassword').value;
+      const namaRekening = document.getElementById('regNamaRekening').value.trim();
+      const nomorRekening = document.getElementById('regNomorRekening').value.trim();
+      const noHP = document.getElementById('regNoHP').value.trim();
+      const bankEwallet = document.getElementById('regBankEwallet').value;
+
+      if(password!==confirmPassword){ alert('Kata sandi tidak cocok!'); return; }
+      if(localStorage.getItem('user_'+userId)){ alert('User ID sudah digunakan'); return; }
+
+      const userData={userId,email,password,namaRekening,nomorRekening,noHP,bankEwallet};
+      localStorage.setItem('user_'+userId, JSON.stringify(userData));
+      alert('Pendaftaran berhasil! Silakan login.');
+      showPage('login');
+    });
+
+   function login(){
+  const userId = document.getElementById('userLogin').value.trim();
+  const password = document.getElementById('passLogin').value;
+  if(!userId || !password){ alert('Isi User ID dan Kata Sandi'); return; }
+  const userDataJSON = localStorage.getItem('user_'+userId);
+  if(!userDataJSON){ alert('User ID tidak ditemukan'); return; }
+  const userData = JSON.parse(userDataJSON);
+  if(userData.password===password){
+    alert('Login berhasil!');
+    document.querySelector('.login-form').style.display='none';
+    document.getElementById('registerPage').style.display='none';
+    document.getElementById('userArea').style.display='none'; // hide userArea lama
+    document.getElementById('dashboard').style.display = 'block'; // show dashboard baru
+    document.getElementById('dashUser').textContent = userId;
+  } else alert('Kata sandi salah');
+}
+
+function logout(){
+  document.getElementById('dashboard').style.display = 'none';
+  document.querySelector('.login-form').style.display = 'flex';
+  alert('Anda sudah logout.');
+}
+
+    document.getElementById('depositForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const amount=document.getElementById('depositAmount').value;
+      alert('Deposit sebesar Rp '+amount+' berhasil diajukan.');
+      this.reset();
+    });
+
+    document.getElementById('withdrawForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const amount=document.getElementById('withdrawAmount').value;
+      alert('Withdraw sebesar Rp '+amount+' berhasil diajukan.');
+      this.reset();
+    });
+
+    showPage('login');
+  </script>
+</body>
+</html>
