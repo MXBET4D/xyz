@@ -132,17 +132,17 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
 .provider-boxes {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* selalu 4 kolom */
-  gap: 8px; /* jarak antar kotak */
+  gap: 8px;
   margin: 10px 0;
 }
 
 .provider-card {
   background: #1a1a1a;
   color: #FFD700;
-  padding: 10px;
+  padding: 12px;
   text-align: center;
   border-radius: 6px;
-  font-size: 14px;   /* biar muat di HP */
+  font-size: 14px;
   font-weight: bold;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   cursor: pointer;
@@ -154,10 +154,18 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
   color: #ff4444;
 }
 
-/* Mobile biar tetap rapi */
-@media (max-width: 768px) {
-  .provider-boxes {
-    grid-template-columns: repeat(2, 1fr); /* jadi 2 kolom di layar kecil */
+/* Responsive ukuran font & padding */
+@media (max-width: 480px) {
+  .provider-card {
+    font-size: 12px;   /* kecilin font */
+    padding: 8px;      /* kecilin padding */
+  }
+}
+
+@media (max-width: 360px) {
+  .provider-card {
+    font-size: 11px;   /* lebih kecil lagi */
+    padding: 6px;      /* lebih rapat */
   }
 }
 
