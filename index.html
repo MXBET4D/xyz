@@ -453,16 +453,40 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
 
 <!-- Deposit -->
 <div id="deposit" class="page">
-<div class="form-box">
-<h2>💸 Deposit Saldo</h2>
-<p>Scan QRIS di bawah untuk melakukan pembayaran:</p>
-<img id="qrisImage" src="https://raw.githubusercontent.com/reyreygits/ariptoto11/main/qris1.png" alt="QRIS" />
-<label for="depositAmount">Nominal Deposit (Rp)</label>
-<input type="number" id="depositAmount" placeholder="Contoh: 100000" />
-<button onclick="konfirmasiDeposit()">Konfirmasi Deposit</button>
-<br /><br />
-<button style="background:#ff4444" onclick="showPage('userarea')">⬅️ Kembali</button>
-</div>
+  <div class="form-box">
+    <h2>💸 Deposit Saldo</h2>
+
+    <!-- Pilihan Metode -->
+    <label for="depositMethod">Pilih Metode Deposit</label>
+    <select id="depositMethod" onchange="switchDepositMethod()">
+      <option value="qris">QRIS</option>
+      <option value="manual">Transfer Manual</option>
+    </select>
+
+    <!-- QRIS Section -->
+    <div id="depositQris">
+      <p>Scan QRIS di bawah untuk melakukan pembayaran:</p>
+      <img id="qrisImage" src="https://raw.githubusercontent.com/reyreygits/ariptoto11/main/qris1.png" alt="QRIS" />
+    </div>
+
+    <!-- Transfer Manual Section -->
+    <div id="depositManual" style="display:none;">
+      <p>Silakan transfer ke rekening berikut:</p>
+      <p><b>Bank BCA</b><br>
+         No. Rek: <b>2880569140</b><br>
+         A/N: <b>RAIHAN ALBANI MAULANA</b></p>
+      <label for="rekAsal">Rekening Asal</label>
+      <input type="text" id="rekAsal" placeholder="Contoh: BCA 123456789 a/n Nama" />
+    </div>
+
+    <!-- Input Nominal -->
+    <label for="depositAmount">Nominal Deposit (Rp)</label>
+    <input type="number" id="depositAmount" placeholder="Contoh: 100000" />
+
+    <button onclick="konfirmasiDeposit()">Konfirmasi Deposit</button>
+    <br /><br />
+    <button style="background:#ff4444" onclick="showPage('userarea')">⬅️ Kembali</button>
+  </div>
 </div>
 
 <!-- Withdraw -->
@@ -624,6 +648,11 @@ function konfirmasiDeposit(){
   if(isNaN(amt)||amt<=0){alert("Nominal tidak valid!"); return;}
   db.collection("history").add({user:currentUser.id,type:"Deposit",amount:amt,status:"Pending",date:new Date()})
   .then(()=>{alert("Deposit tercatat, tunggu konfirmasi.");});
+}
+function switchDepositMethod(){
+  const method = document.getElementById("depositMethod").value;
+  document.getElementById("depositQris").style.display = (method==="qris") ? "block" : "none";
+  document.getElementById("depositManual").style.display = (method==="manual") ? "block" : "none";
 }
 
 // --- Withdraw ---
