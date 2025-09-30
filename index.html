@@ -90,45 +90,10 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
 
 /* User area */
 #userarea header { flex-wrap:wrap; }
-#userarea .menu {
-  display: flex;
-  justify-content: space-around; /* bagi rata biar rapi */
-  flex-wrap: nowrap;             /* tetap 1 baris */
-  gap: 8px;
-  padding: 6px 0;
-}
+#userarea .menu { display:flex; gap:15px; flex-wrap:wrap; color:#FFD700; font-weight:bold; }
+#userarea .menu a { color:#FFD700; text-decoration:none; cursor:pointer; transition:color 0.3s ease; user-select:none; }
+#userarea .menu a:hover { color:#ff4444; }
 
-#userarea .menu a {
-  flex: 1;                       /* semua link dibagi rata */
-  text-align: center;
-  font-size: 12px;               /* diperkecil */
-  padding: 6px 4px;              /* jarak lebih kecil */
-  color: #FFD700;
-  font-weight: bold;
-  text-decoration: none;
-  border-radius: 6px;
-  transition: background 0.3s ease, color 0.3s ease;
-}
-
-#userarea .menu a:hover {
-  background: #FFD700;
-  color: #111;
-}
-#userarea .menu a img {
-  width: 28px;
-  height: 28px;
-  margin-bottom: 6px;
-}
-/* Mobile */
-@media (max-width: 768px) {
-  #userarea .menu {
-    grid-template-columns: 1fr 1fr; /* 2 kolom di HP */
-  }
-  #userarea .menu a {
-    font-size: 12px;
-    padding: 10px;
-  }
-}
 .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:15px; }
 .card { background:#2a2a2a; border-radius:8px; padding:15px; box-shadow:0 6px 15px rgba(0,0,0,0.4); transition:transform 0.3s ease; }
 .card:hover { transform:translateY(-5px); }
