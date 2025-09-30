@@ -214,25 +214,24 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
   justify-content: space-around;
   align-items: center;
   padding: 8px 0;
-  padding-bottom: env(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom); /* aman untuk iPhone */
   border-top: 2px solid #FFD700;
   z-index: 9999;
 }
+
 .bottom-nav a {
   flex: 1;
   text-align: center;
-  text-decoration: none;
-  color: #FFD700;
+  color: #fff;
   font-size: 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  text-decoration: none;
 }
+
 .bottom-nav img {
-  width: 22px;
-  height: 22px;
-  margin-bottom: 3px;
-  filter: invert(84%) sepia(68%) saturate(553%) hue-rotate(2deg) brightness(104%) contrast(104%);
+  width: 24px;
+  height: 24px;
+  display: block;
+  margin: 0 auto 4px;
 }
 .bottom-nav a:hover { color: #ff4444; }
 
@@ -282,11 +281,7 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
       <a href="https://wa.me/6282128009210" target="_blank" class="btn-wa">💬 Live Chat</a>
     </div>
   </div>
-<!-- Halaman depan -->
-<div id="home" class="page active">
-  <h1>Selamat Datang</h1>
-  <button onclick="showPage('daftar')" class="btn-main">Daftar</button>
-</div>
+
 <!-- Daftar -->
 <div id="daftar" class="page">
 <div class="form-box">
@@ -573,7 +568,8 @@ document.querySelectorAll(".provider-card").forEach(pc=>{
 </script>
 
   <!-- Bottom Navigation -->
-<nav class="bottom-nav">
+<!-- Bottom Navigation (selalu muncul di bawah) -->
+  <nav class="bottom-nav">
     <a href="#" onclick="showPage('home')">
       <img src="https://img.icons8.com/ios-filled/50/ffffff/home.png" alt="Home"/>
       <span>Beranda</span>
@@ -588,11 +584,7 @@ document.querySelectorAll(".provider-card").forEach(pc=>{
     </a>
     <a href="https://wa.me/6282128009210" target="_blank">
       <img src="https://img.icons8.com/ios-filled/50/ffffff/chat.png" alt="Chat"/>
-      <span>Chat</span>
-    </a>
-    <a href="https://wa.me/6282128009210" target="_blank">
-      <img src="https://img.icons8.com/ios-filled/50/ffffff/online-support.png" alt="Livechat"/>
-      <span>Livechat</span>
+      <span>Live Chat</span>
     </a>
   </nav>
   
