@@ -131,21 +131,22 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
 
 .provider-boxes {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 kolom rata */
-  gap: 10px; /* jarak antar kotak */
+  grid-template-columns: repeat(4, 1fr); /* selalu 4 kolom */
+  gap: 8px; /* jarak antar kotak */
   margin: 10px 0;
 }
 
 .provider-card {
   background: #1a1a1a;
   color: #FFD700;
-  padding: 15px;
+  padding: 10px;
   text-align: center;
-  border-radius: 8px;
+  border-radius: 6px;
+  font-size: 14px;   /* biar muat di HP */
   font-weight: bold;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  transition: 0.3s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .provider-card:hover {
