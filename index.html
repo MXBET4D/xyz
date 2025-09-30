@@ -108,9 +108,12 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
   font-weight: bold;
   text-decoration: none;
   transition: 0.3s;
-  font-size: 12px;
-  padding: 8px 0;
-  width: 100%;   /* biar semua tombol sama besar */
+  font-size: 11px;       /* kecilin biar muat di mobile */
+  padding: 10px 4px;     /* tambah padding atas-bawah */
+  min-height: 40px;      /* kasih tinggi minimum */
+  width: 100%;           /* semua tombol sama besar */
+  text-align: center;    /* teks rata tengah */
+  box-sizing: border-box; /* biar padding tidak ganggu ukuran */
 }
 
 #userarea .menu a:hover {
