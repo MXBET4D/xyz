@@ -130,6 +130,39 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
 
 .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:15px; }
 .card { background:#2a2a2a; border-radius:8px; padding:15px; box-shadow:0 6px 15px rgba(0,0,0,0.4); transition:transform 0.3s ease; }
+.cards-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 kolom sejajar */
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.card {
+  background: #2a2a2a;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  color: #fff;
+  font-size: 14px; /* default font */
+}
+
+/* Tampilan mobile */
+@media (max-width: 768px) {
+  .cards-row {
+    grid-template-columns: repeat(2, 1fr); /* tetap 2 kolom di HP */
+    gap: 8px;
+  }
+  .card {
+    font-size: 12px;   /* font diperkecil */
+    padding: 10px;
+  }
+  .card h3 {
+    font-size: 14px;
+  }
+  .card p {
+    font-size: 12px;
+  }
+}
 .card:hover { transform:translateY(-5px); }
 .card h3 { margin-top:0; color:#ff4444; }
 
@@ -333,17 +366,18 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
 </div>
 </header>
 <div class="container">
-<div class="cards-row">
-  <div class="card">
-    <h3>User Data</h3>
-    <p id="userData">User: - | Balance: Rp 0</p>
-    <p id="bankData"></p>
-    <p id="phoneData"></p>
-  </div>
+  <div class="cards-row">
+    <div class="card">
+      <h3>User Data</h3>
+      <p id="userData">User: - | Balance: Rp 0</p>
+      <p id="bankData"></p>
+      <p id="phoneData"></p>
+    </div>
 
-  <div class="card">
-    <h3>Last Bet/Win Report</h3>
-    <p id="betReport">No Data</p>
+    <div class="card">
+      <h3>Last Bet/Win Report</h3>
+      <p id="betReport">No Data</p>
+    </div>
   </div>
 </div>
 
