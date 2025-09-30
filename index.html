@@ -91,11 +91,11 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
 /* Menu User Area */
 #userarea .menu {
   display: grid;
-  grid-template-columns: repeat(6, 1fr); /* tetap 6 sejajar */
+  grid-template-columns: repeat(6, minmax(0, 1fr)); /* 6 kolom sama besar */
   gap: 6px;
-  max-width: 100%; /* batasi biar tidak melar aneh */
-  margin: 0 auto; /* posisikan di tengah */
-  justify-items: center; /* isi rata tengah */
+  justify-content: center; /* grid rata tengah */
+  align-items: center;
+  text-align: center;
 }
 
 #userarea .menu a {
@@ -110,8 +110,7 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
   transition: 0.3s;
   font-size: 12px;
   padding: 8px 0;
-  width: 100%; /* semua tombol sama besar */
-  text-align: center;
+  width: 100%;   /* biar semua tombol sama besar */
 }
 
 #userarea .menu a:hover {
