@@ -88,14 +88,18 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
 .form-box h2 { color:#FFD700; margin-bottom:20px; }
 .form-box label { display:block; text-align:left; margin-top:10px; color:#FFD700; font-weight:bold; font-size:14px; }
 
+/* Menu User Area */
 #userarea .menu {
   display: grid;
-  grid-template-columns: repeat(6, 1fr); /* 6 tombol rata */
+  grid-template-columns: repeat(6, 1fr); /* 6 tombol sama rata */
   gap: 8px;
   width: 100%;
+  margin: 0 auto;            /* grid rata tengah */
+  justify-items: center;     /* isi kolom rata tengah */
 }
 
 #userarea .menu a {
+  width: 100%;               /* biar tombol memenuhi kolom */
   display: flex;
   align-items: center;
   justify-content: center;
