@@ -654,6 +654,18 @@ function switchDepositMethod(){
   document.getElementById("depositQris").style.display = (method==="qris") ? "block" : "none";
   document.getElementById("depositManual").style.display = (method==="manual") ? "block" : "none";
 }
+function approveDeposit(id, userId, amount) {
+  // Update saldo user
+  const userRef = db.collection("users").doc(userId);
+  db.runTransaction(async (t) => {
+    const userDoc = await t.get(userRef);
+    const newBalance = (userDoc.data().balance || 0) + amount;
+    t.update(userRef, { balance: newBalance });
+    t.update(db.collection("history").doc(id), { status: "Approved" });
+  }).then(() => {
+    alert("Deposit disetujui & saldo bertambah.");
+  });
+}
 
 // --- Withdraw ---
 function showWithdraw(){
