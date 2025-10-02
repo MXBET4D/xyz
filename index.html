@@ -487,6 +487,9 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
     <br /><br />
     <button style="background:#ff4444" onclick="showPage('userarea')">⬅️ Kembali</button>
   </div>
+  <div id="historyList" style="margin:20px; color:#FFD700; font-size:14px;">
+  <h3>📜 Riwayat Transaksi</h3>
+</div>
 </div>
 
 <!-- Withdraw -->
@@ -642,12 +645,48 @@ function showHistory(){
 }
 
 // --- Deposit ---
+// Konfirmasi Deposit (pending)
 function konfirmasiDeposit(){
   if(!currentUser){alert("Login dulu!"); return;}
   const amt=parseInt(document.getElementById("depositAmount").value);
   if(isNaN(amt)||amt<=0){alert("Nominal tidak valid!"); return;}
-  db.collection("history").add({user:currentUser.id,type:"Deposit",amount:amt,status:"Pending",date:new Date()})
-  .then(()=>{alert("Deposit tercatat, tunggu konfirmasi.");});
+  db.collection("history").add({
+    user:currentUser.id,
+    type:"Deposit",
+    amount:amt,
+    status:"Pending",
+    date:new Date()
+  })
+  .then(()=>{
+    alert("Deposit tercatat, menunggu konfirmasi admin.");
+    showHistory(); // refresh daftar transaksi user
+  });
+}
+
+// Tampilkan riwayat transaksi user
+function showHistory(){
+  if(!currentUser) return;
+  db.collection("history")
+    .where("user","==",currentUser.id)
+    .orderBy("date","desc")
+    .limit(10)
+    .get()
+    .then(snap=>{
+      let html="<table style='width:100%; border-collapse:collapse;'>";
+      html+="<tr><th>Tanggal</th><th>Jenis</th><th>Nominal</th><th>Status</th></tr>";
+      snap.forEach(doc=>{
+        let d=doc.data();
+        let tgl = d.date.toDate().toLocaleString("id-ID");
+        html+=`<tr>
+          <td>${tgl}</td>
+          <td>${d.type}</td>
+          <td>Rp ${d.amount.toLocaleString()}</td>
+          <td>${d.status}</td>
+        </tr>`;
+      });
+      html+="</table>";
+      document.getElementById("historyList").innerHTML=html;
+    });
 }
 function switchDepositMethod(){
   const method = document.getElementById("depositMethod").value;
