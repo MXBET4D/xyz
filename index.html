@@ -629,21 +629,6 @@ function updateUserInfo(){
   }
 }
 
-// --- History ---
-function showHistory(){
-  if(!currentUser){alert("Login dulu!"); return;}
-  db.collection("history").where("user","==",currentUser.id).get().then(snap=>{
-    const list=document.getElementById("historyList");
-    list.innerHTML="";
-    snap.forEach(doc=>{
-      const d=doc.data();
-      const div=document.createElement("div");
-      div.innerText=`${d.type}: Rp ${d.amount} (${d.status})`;
-      list.appendChild(div);
-    });
-  });
-}
-
 // --- Deposit ---
 // Konfirmasi Deposit (pending)
 function konfirmasiDeposit(){
@@ -658,6 +643,7 @@ function konfirmasiDeposit(){
     date:new Date()
   })
   .then(()=>{
+    console.log("Deposit saved:", d);
     alert("Deposit tercatat, menunggu konfirmasi admin.");
     showHistory(); // refresh daftar transaksi user
   });
