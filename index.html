@@ -393,6 +393,7 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
 </div>
 </header>
 <div class="container">
+  <div id="historyList" style="margin-top:15px; text-align:left; font-size:13px;"></div>
   <div class="cards-row">
     <div class="card">
       <h3>User Data</h3>
@@ -568,20 +569,41 @@ function showPage(id){
   document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
   document.getElementById(id).classList.add("active");
 }
-
+let unsubscribeUser = null;
+  
 // --- Auth & Register ---
 function login(){
   const u=document.getElementById("userLogin").value;
   const p=document.getElementById("passLogin").value;
   if(!u||!p){alert("Isi semua field!"); return;}
+  
   db.collection("users").doc(u).get().then(doc=>{
     if(doc.exists && doc.data().password===p){
       currentUser={id:u,...doc.data()};
-      showPage("userarea"); updateUserInfo();
-    } else {alert("Login gagal!");}
+      showPage("userarea"); 
+      updateUserInfo();
+
+      // 🔥 Listener realtime untuk saldo user
+      if(unsubscribeUser) unsubscribeUser(); // kalau ada listener lama, matikan dulu
+      unsubscribeUser = db.collection("users").doc(u)
+        .onSnapshot(snap=>{
+          if(snap.exists){
+            currentUser = {id:u, ...snap.data()};
+            updateUserInfo();
+          }
+        });
+
+    } else {
+      alert("Login gagal!");
+    }
   });
 }
-function logout(){currentUser=null; showPage("home");}
+function logout(){
+  if(unsubscribeUser) unsubscribeUser(); // matikan listener balance
+  unsubscribeUser = null;
+  currentUser=null;
+  showPage("home");
+}
 function register(){
   const u=document.getElementById("newUser").value;
   const p=document.getElementById("newPass").value;
