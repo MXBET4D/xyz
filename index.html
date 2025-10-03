@@ -595,7 +595,8 @@ function register(){
 }
 function updateUserInfo(){
   if(currentUser){
-    document.getElementById("userData").innerText=`User: ${currentUser.id} | Balance: Rp ${currentUser.balance}`;
+    document.getElementById("userData").innerText =
+  `User: ${currentUser.id} | Balance: Rp ${formatRupiah(currentUser.balance)}`;
     document.getElementById("bankData").innerText=`Bank/E-Wallet: ${currentUser.bank} - ${currentUser.rekening}`;
     document.getElementById("withdrawRekening").innerText=`No Rekening: ${currentUser.rekening}`;
     document.getElementById("withdrawNama").innerText=`Atas Nama: ${currentUser.nama}`;
@@ -625,7 +626,9 @@ function konfirmasiDeposit(){
   db.collection("history").add({user:currentUser.id,type:"Deposit",amount:amt,status:"Pending",date:new Date()})
   .then(()=>{alert("Deposit tercatat, tunggu konfirmasi.");});
 }
-
+function formatRupiah(angka) {
+  return angka.toLocaleString("id-ID"); // otomatis kasih titik ribuan
+}
 // --- Withdraw ---
 function showWithdraw(){
   if(!currentUser){alert("Login dulu!"); return;}
