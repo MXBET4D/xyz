@@ -454,16 +454,39 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
 
 <!-- Deposit -->
 <div id="deposit" class="page">
-<div class="form-box">
-<h2>💸 Deposit Saldo</h2>
-<p>Scan QRIS di bawah untuk melakukan pembayaran:</p>
-<img id="qrisImage" src="https://raw.githubusercontent.com/reyreygits/ariptoto11/main/qris1.png" alt="QRIS" />
-<label for="depositAmount">Nominal Deposit (Rp)</label>
-<input type="number" id="depositAmount" placeholder="Contoh: 100000" />
-<button onclick="konfirmasiDeposit()">Konfirmasi Deposit</button>
-<br /><br />
-<button style="background:#ff4444" onclick="showPage('userarea')">⬅️ Kembali</button>
+  <div class="form-box">
+    <h2>💸 Deposit Saldo</h2>
+
+    <label for="depositMethod">Pilih Metode Deposit</label>
+    <select id="depositMethod" onchange="toggleDepositMethod()">
+      <option value="qris">QRIS (Cepat & Mudah)</option>
+      <option value="bank">Transfer Bank</option>
+    </select>
+
+    <!-- Bagian QRIS -->
+    <div id="qrisSection">
+      <p>Scan QRIS di bawah untuk melakukan pembayaran:</p>
+      <img id="qrisImage" src="https://raw.githubusercontent.com/reyreygits/ariptoto11/main/qris1.png" alt="QRIS" />
+    </div>
+
+    <!-- Bagian Transfer Bank -->
+    <div id="bankSection" style="display:none; text-align:left;">
+      <p>Silakan transfer ke salah satu rekening resmi kami di bawah ini:</p>
+      <div style="background:#111; padding:10px; border-radius:8px; margin-top:10px;">
+        <p><b>Bank BCA</b> — 1234567890<br>Atas Nama: <b>PT MAXBET4D</b></p>
+        <p><b>Bank BNI</b> — 9876543210<br>Atas Nama: <b>PT MAXBET4D</b></p>
+        <p><b>Bank Mandiri</b> — 1112223334<br>Atas Nama: <b>PT MAXBET4D</b></p>
+        <p><b>Bank BRI</b> — 5556667778<br>Atas Nama: <b>PT MAXBET4D</b></p>
+      </div>
 </div>
+
+    <label for="depositAmount" style="margin-top:10px;">Nominal Deposit (Rp)</label>
+    <input type="number" id="depositAmount" placeholder="Contoh: 100000" />
+
+    <button onclick="konfirmasiDeposit()">Konfirmasi Deposit</button>
+    <br /><br />
+    <button style="background:#ff4444" onclick="showPage('userarea')">⬅️ Kembali</button>
+  </div>
 </div>
 
 <!-- Withdraw -->
@@ -642,14 +665,31 @@ function showHistory(){
     });
   });
 }
-
+function toggleDepositMethod() {
+  const method = document.getElementById("depositMethod").value;
+  document.getElementById("qrisSection").style.display = method === "qris" ? "block" : "none";
+  document.getElementById("bankSection").style.display = method === "bank" ? "block" : "none";
+}
 // --- Deposit ---
-function konfirmasiDeposit(){
-  if(!currentUser){alert("Login dulu!"); return;}
-  const amt=parseInt(document.getElementById("depositAmount").value);
-  if(isNaN(amt)||amt<=0){alert("Nominal tidak valid!"); return;}
-  db.collection("history").add({user:currentUser.id,type:"Deposit",amount:amt,status:"Pending",date:new Date()})
-  .then(()=>{alert("Deposit tercatat, tunggu konfirmasi.");});
+function konfirmasiDeposit() {
+  if (!currentUser) { alert("Login dulu!"); return; }
+
+  const amt = parseInt(document.getElementById("depositAmount").value);
+  if (isNaN(amt) || amt <= 0) { alert("Nominal tidak valid!"); return; }
+
+  const method = document.getElementById("depositMethod").value;
+  const metodeText = method === "bank" ? "Transfer Bank" : "QRIS";
+
+  db.collection("history").add({
+    user: currentUser.id,
+    type: "Deposit",
+    method: metodeText,
+    amount: amt,
+    status: "Pending",
+    date: new Date()
+  }).then(() => {
+    alert(`Deposit via ${metodeText} tercatat, tunggu konfirmasi admin.`);
+  });
 }
 
 // --- Withdraw ---
