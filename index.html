@@ -470,37 +470,54 @@ header { background:#111a33; padding:10px 20px; display:flex; justify-content:sp
     </div>
 
     <!-- Bagian Transfer Bank -->
-<div id="bankSection" style="display:none; text-align:left;">
+<div id="depositSection" class="section" style="display:none">
+  <h2>💸 Deposit Saldo</h2>
+
+  <label for="metode">Pilih Metode Deposit</label>
+  <select id="metode">
+    <option value="bank">Transfer Bank</option>
+    <option value="ewallet">E-Wallet</option>
+  </select>
+
   <p>Silakan transfer ke salah satu rekening resmi kami di bawah ini:</p>
 
-  <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
-    <img src="https://upload.wikimedia.org/wikipedia/id/thumb/2/2e/BCA_logo.svg/320px-BCA_logo.svg.png" width="48" alt="BCA">
-    <div>
-      <b>BCA</b><br>1234567890<br><small>PT MAXBET4D</small>
+  <div class="bank-list">
+    <div class="bank-item">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/BCA_logo.svg" width="48" alt="BCA">
+      <div>
+        <strong>BCA</strong><br>
+        1234567890<br>
+        PT MAXBET4D
+      </div>
     </div>
-  </div>
 
-  <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
-    <img src="https://upload.wikimedia.org/wikipedia/id/thumb/7/7e/BNI_logo.svg/320px-BNI_logo.svg.png" width="48" alt="BNI">
-    <div>
-      <b>BNI</b><br>9876543210<br><small>PT MAXBET4D</small>
+    <div class="bank-item">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/88/Bank_BNI_logo.svg" width="48" alt="BNI">
+      <div>
+        <strong>BNI</strong><br>
+        9876543210<br>
+        PT MAXBET4D
+      </div>
     </div>
-  </div>
 
-  <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
-    <img src="https://upload.wikimedia.org/wikipedia/id/thumb/0/0b/Logo_Bank_Mandiri.svg/320px-Logo_Bank_Mandiri.svg.png" width="48" alt="Mandiri">
-    <div>
-      <b>Mandiri</b><br>1112223334<br><small>PT MAXBET4D</small>
+    <div class="bank-item">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Bank_Mandiri_logo.svg" width="48" alt="Mandiri">
+      <div>
+        <strong>Mandiri</strong><br>
+        1112223334<br>
+        PT MAXBET4D
+      </div>
     </div>
-  </div>
 
-  <div style="display:flex; align-items:center; gap:10px;">
-    <img src="https://upload.wikimedia.org/wikipedia/id/thumb/5/5b/Bank_Rakyat_Indonesia_logo.svg/320px-Bank_Rakyat_Indonesia_logo.svg.png" width="48" alt="BRI">
-    <div>
-      <b>BRI</b><br>5556667778<br><small>PT MAXBET4D</small>
+    <div class="bank-item">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/68/Bank_BRI_logo.svg" width="48" alt="BRI">
+      <div>
+        <strong>BRI</strong><br>
+        71400100301150008<br>
+        JHONATAN LAY LAIS
+      </div>
     </div>
   </div>
-</div>
 
     <label for="depositAmount" style="margin-top:10px;">Nominal Deposit (Rp)</label>
     <input type="number" id="depositAmount" placeholder="Contoh: 100000" />
